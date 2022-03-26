@@ -13,34 +13,39 @@
 #include "../../include/libft.h"
 #include "../../include/push_swap.h"
 
-char	**ft_getstring(struct s_input input)
+char	**ft_getstring(int ac, char **av)
 {
 	char	*tmp;
 	char	**ret;
 	int		i;
 
 	tmp = NULL;
-	if (input.argc == 2)
-		tmp = ft_strdup(input.argv[1]);
-	else if (input.argc > 2)
+	ret = NULL;
+	if (ac == 2)
+		tmp = ft_strdup(av[1]);
+	else if (ac > 2)
 	{
 		i = 1;
-		while (i < input.argc)
+		while (i < ac)
 		{
-			tmp = ft_strnjoin(tmp, input.argv[i]);
-			if (input.argv[++i])
+			tmp = ft_strnjoin(tmp, av[i]);
+			if (av[++i])
 				tmp = ft_strjoin(tmp, " ");
 		}
 	}
 	ret = ft_split(tmp, ' ');
+	free(tmp);
 	return (ret);
 }
 
-char	**ft_parser(struct s_input input)
+char	**ft_parser(int ac, char **av)
 {
 	char	**ret;
 
 	ret = NULL;
-	ret = ft_getstring(input);
+	if (ac < 2)
+		exit(0);
+	ret = ft_getstring(ac, av);
+	validation(ret);
 	return (ret);
 }

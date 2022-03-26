@@ -17,7 +17,8 @@ INCL			= ./include/push_swap.h
 LIB			=	-L ./libft -lft
 LIBFT		=	libft.a
 
-MSRC		=	sources/mandatory/main.c sources/mandatory/parser.c sources/mandatory/validation.c
+MSRC		=	sources/mandatory/main.c sources/mandatory/parser.c sources/mandatory/validation.c\
+				sources/mandatory/init.c
 BSRC		=	sources/checker/*
 
 

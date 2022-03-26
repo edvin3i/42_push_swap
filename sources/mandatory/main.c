@@ -21,25 +21,13 @@ void	err_handler(void)
 
 int	main(int argc, char **argv)
 {
-	char	**cln_nums;
-	t_input	input;
-	int		i;
+	char		**cln_input;
+	int			i;
 
-	cln_nums = NULL;
-	if (argc < 2)
-		err_handler();
-	else
-	{
-		input.argc = argc;
-		input.argv = argv;
-		cln_nums = ft_parser(input);
-	}
 	i = 0;
-	is_allnums(cln_nums);
-	is_nodup(cln_nums);
-	while (cln_nums[i])
+	while (cln_input[i])
 	{
-		ft_printf("%d ", ft_atoi(cln_nums[i]));
+		ft_printf("%d ", ft_atoi(cln_input[i]));
 		i++;
 	}
 	return (0);

@@ -53,10 +53,25 @@ int	is_nodup(char **str)
 	return (0);
 }
 
-/*
+int	is_sorted(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i + 1])
+	{
+		if (ft_atoi(str[i]) < ft_atoi(str[i + 1]))
+			i++;
+		else
+			return (0);
+	}
+	exit(0);
+}
+
 int	validation(char **str)
 {
-
+	is_allnums(str);
+	is_nodup(str);
+	is_sorted(str);
 	return (0);
 }
- */

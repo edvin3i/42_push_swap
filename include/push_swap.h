@@ -16,38 +16,37 @@
 /*
  * Structures
  */
-typedef struct s_input
-{
-	int		argc;
-	char	**argv;
-}				t_input;
-
-typedef struct s_stack
+typedef struct s_node
 {
 	int				index;
 	int				flag;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}				t_stack;
+	struct t_node	*next;
+	struct t_node	*prev;
+}				t_node;
 
-typedef struct s_params
+typedef struct s_common
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_node	*stack_a;
+	t_node	*stack_b;
 	int		index_min;
 	int		mid;
 	int		len_a;
 	int		len_b;
-}				t_params;
+}				t_common;
 /*
  * Parser's functions
  */
-char	**ft_parser(struct s_input input);
-char	**ft_getstring(struct s_input input);
+char	**ft_parser(int ac, char **av);
+char	**ft_getstring(int ac, char **av);
 void	err_handler(void);
 int		validation(char **str);
 int		is_allnums(char **str);
 int		is_nodup(char **str);
-
+int		is_sorted(char **str);
+/*
+ * Init
+ */
+t_node		*init_list(int index);
+t_common	*init_param(char **nums);
 
 #endif
