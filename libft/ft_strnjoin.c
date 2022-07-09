@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-char	*ft_strnjoin(char *str1, char const *str2)
+char	*ft_strnjoin(char *str1, char *str2)
 {
 	char	*result;
 	char	*res_iter;
@@ -20,11 +20,10 @@ char	*ft_strnjoin(char *str1, char const *str2)
 
 	if (!str1)
 	{
-		str1 = (char *) malloc(2);
-		str1[0] = 0;
-		str1[1] = '\0';
+		str1 = malloc(sizeof (char));
+		str1[0] = '\0';
 	}
-	else if (!str2)
+	if (!str2)
 		return (NULL);
 	res_len = ft_strlen(str1) + ft_strlen(str2) + 1;
 	result = (char *)malloc(res_len * sizeof(char));

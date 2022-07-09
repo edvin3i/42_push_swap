@@ -5,27 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 12:25:43 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/25 12:25:50 by gbreana          ###   ########.fr       */
+/*   Created: 2022/03/20 19:48:43 by gbreana           #+#    #+#             */
+/*   Updated: 2022/03/31 01:06:51 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 #include "../../include/push_swap.h"
 
-int	is_allnums(char **str)
+int	is_allnums(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (str[i])
+	i = 1;
+	while (argv[i])
 	{
 		j = 0;
-		while (str[i][j])
+		if (argv[i][j] == '-')
+			j++;
+		while (argv[i][j])
 		{
-			if (!ft_isdigit(str[i][j]))
-				err_handler();
+			if (!ft_isdigit(argv[i][j]))
+			{
+				if (argc == 2)
+					ps_free_str(argv);
+				error();
+			}
 			j++;
 		}
 		i++;
@@ -33,19 +39,23 @@ int	is_allnums(char **str)
 	return (0);
 }
 
-int	is_nodup(char **str)
+int	is_nodup(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (str[i])
+	i = 1;
+	while (argv[i])
 	{
 		j = i + 1;
-		while (str[j])
+		while (argv[j])
 		{
-			if (ft_atoin(str[i]) == ft_atoin(str[j]))
-				err_handler();
+			if (ft_atoin(argv[i]) == ft_atoin(argv[j]))
+			{
+				if (argc == 2)
+					ps_free_str(argv);
+				error();
+			}
 			j++;
 		}
 		i++;
@@ -53,25 +63,37 @@ int	is_nodup(char **str)
 	return (0);
 }
 
-int	is_sorted(char **str)
+int	is_sorted_arr(int argc, char **argv)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while (str[i + 1])
+	if (argc == 2)
+		i = 0;
+	else
+		i = 1;
+	while (argv[i + 1])
 	{
-		if (ft_atoi(str[i]) < ft_atoi(str[i + 1]))
+		if (ft_atoin(argv[i]) < ft_atoin(argv[i + 1]))
 			i++;
 		else
 			return (0);
 	}
+	if (argc == 2)
+		ps_free_str(argv);
 	exit(0);
 }
 
-int	validation(char **str)
+void	validation(int argc, char **argv)
 {
-	is_allnums(str);
-	is_nodup(str);
-	is_sorted(str);
-	return (0);
+	char	**tmp;
+
+	if (argc == 2)
+		tmp = ft_split(argv[1], ' ');
+	else
+		tmp = argv;
+	is_allnums(argc, tmp);
+	is_nodup(argc, tmp);
+	is_sorted_arr(argc, tmp);
+	if (argc == 2)
+		ps_free_str(tmp);
 }

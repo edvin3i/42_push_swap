@@ -12,6 +12,9 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2
+# endif
 /*
  * Includes
  */
@@ -63,13 +66,13 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-char	*ft_substr(char const *str, unsigned int start, size_t len);
-char	*ft_strjoin(char const *str1, char const *str2);
-char	*ft_strnjoin(char *str1, char const *str2);
-char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(const char *str, unsigned int start, size_t len);
+char	*ft_strjoin(const char *str1, const char *str2);
+char	*ft_strnjoin(char *str1, char *str2);
+char	*ft_strtrim(const char *s1, char const *set);
 char	*ft_itoa(int n);
-char	**ft_split(char const *str, char c);
-char	*ft_strmapi(char const *str, char (*f)(unsigned int, char));
+char	**ft_split(const char *str, char c);
+char	*ft_strmapi(const char *str, char (*f)(unsigned int, char));
 void	ft_striteri(char *str, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *str, int fd);
@@ -97,4 +100,11 @@ int		ft_putptr(uintptr_t num);
 int		ft_putunbr(unsigned int num);
 int		ft_strchri(const char *str, int c);
 
+/*
+ * Get Next Line
+ */
+char	*ft_get_new_chars(int fd, char *saved_lines, char *buffer);
+char	*ft_get_line(char *saved_line);
+char	*ft_save(char *saved_line);
+char	*get_next_line(int fd);
 #endif

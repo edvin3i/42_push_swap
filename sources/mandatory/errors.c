@@ -1,51 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 14:00:17 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/24 14:00:23 by gbreana          ###   ########.fr       */
+/*   Created: 2022/03/27 22:20:05 by gbreana           #+#    #+#             */
+/*   Updated: 2022/03/30 15:19:27 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 #include "../../include/push_swap.h"
 
-char	**ft_getstring(int ac, char **av)
+void	error(void)
 {
-	char	*tmp;
-	char	**ret;
-	int		i;
-
-	tmp = NULL;
-	ret = NULL;
-	if (ac == 2)
-		tmp = ft_strdup(av[1]);
-	else if (ac > 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			tmp = ft_strnjoin(tmp, av[i]);
-			if (av[++i])
-				tmp = ft_strjoin(tmp, " ");
-		}
-	}
-	ret = ft_split(tmp, ' ');
-	free(tmp);
-	return (ret);
+	write(2, "Error\n", 6);
+	exit(0);
 }
 
-char	**ft_parser(int ac, char **av)
+void	ps_free_str(char **str)
 {
-	char	**ret;
+	int	i;
 
-	ret = NULL;
-	if (ac < 2)
-		exit(0);
-	ret = ft_getstring(ac, av);
-	validation(ret);
-	return (ret);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+void	ps_free_stack(t_node **stack)
+{
+	t_node	*tmp;
+	t_node	*node;
+
+	node = *stack;
+	while (node)
+	{
+		tmp = node;
+		node = node->next;
+		free(tmp);
+	}
+	free(stack);
 }

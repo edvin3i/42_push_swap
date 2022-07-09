@@ -1,50 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   sort_radix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 08:19:53 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/31 00:16:03 by gbreana          ###   ########.fr       */
+/*   Created: 2022/03/30 20:16:38 by gbreana           #+#    #+#             */
+/*   Updated: 2022/03/30 20:17:07 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 #include "../../include/push_swap.h"
 
-t_node	**ps_lstcreate(void)
-{
-	t_node	**stack;
-
-	stack = (t_node **) malloc(sizeof (t_node));
-	if (!stack)
-		exit(0);
-	*stack = NULL;
-	return (stack);
-}
-
-void	ps_init_stack(t_node **stack, int argc, char **argv)
+void	sort_radix(t_node **stack_a, t_node **stack_b)
 {
 	int		i;
-	char	**tmp;
+	int		j;
+	int		len_a;
+	int		bmax;
 	t_node	*node;
 
 	i = 0;
-	if (argc == 2)
-		tmp = ft_split(argv[1], ' ');
-	else
+	node = *stack_a;
+	len_a = ps_lstsize(node);
+	bmax = ps_index_bmax(stack_a);
+	while (i < bmax)
 	{
-		tmp = argv;
-		i = 1;
-	}
-	while (tmp[i])
-	{
-		node = ps_lstnew(ft_atoin(tmp[i]));
-		ps_lstadd_back(stack, node);
+		j = 0;
+		while (j++ < len_a)
+		{
+			node = *stack_a;
+			if (((node->index >> i) & 1) == 1)
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+		}
+		while (ps_lstsize(*stack_b) != 0)
+			pa(stack_a, stack_b);
 		i++;
 	}
-	ps_set_index(stack);
-	if (argc == 2)
-		ps_free_str(tmp);
 }

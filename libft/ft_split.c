@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "../include/libft.h"
+#include "../include/push_swap.h"
 
-static int	ft_word_count(char const *str, char delimiter)
+static int	ft_word_count(const char *str, char delimiter)
 {
 	int		counter;
 	int		prev_delim;
@@ -34,7 +35,7 @@ static int	ft_word_count(char const *str, char delimiter)
 	return (counter);
 }
 
-static char	*ft_word(char const *str, char c)
+static char	*ft_word(const char *str, char c)
 {
 	char	*word;
 	int		i;
@@ -90,7 +91,7 @@ static char	**ft_word_to_array(char **arr, const char *s, char c, int wrd_cnt)
 	return (arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	int		num_words;
 	char	**result;

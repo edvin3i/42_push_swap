@@ -28,7 +28,7 @@ SRCS		=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c\
  				ft_lstlast_bonus.c ft_lstdelone_bonus.c\
  				ft_lstclear_bonus.c ft_lstiter_bonus.c\
  				ft_lstmap_bonus.c\
- 				ft_printf.c
+ 				ft_printf.c get_next_line.c
 OBJS		=	$(patsubst %.c,%.o,$(SRCS))
 
 DEPS		=	$(patsubst %.c,%.d,$(SRCS))

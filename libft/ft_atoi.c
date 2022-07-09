@@ -52,9 +52,9 @@ int	ft_atoin(const char *str)
 	{
 		ret = ret * 10 + sign * (*str++ - '0');
 		if (ret > INT_MAX)
-			err_handler();
+			error();
 		else if (ret < INT_MIN)
-			err_handler();
+			error();
 	}
 	return ((int)ret);
 }
