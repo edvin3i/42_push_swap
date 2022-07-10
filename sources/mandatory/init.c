@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 08:19:53 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/31 00:16:03 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 08:27:03 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,17 @@ void	ps_init_stack(t_node **stack, int argc, char **argv)
 	ps_set_index(stack);
 	if (argc == 2)
 		ps_free_str(tmp);
+}
+
+t_param	*ps_init_params(t_node **stack_a, t_node **stack_b)
+{
+	t_param	*p;
+
+	p = (t_param *) malloc(sizeof(t_param *));
+	ft_bzero(p, sizeof(t_param *));
+	p->stack_a = *stack_a;
+	p->stack_b = *stack_b;
+	p->len_a = ps_lstsize(p->stack_a);
+	p->len_b = ps_lstsize(*stack_b);
+	return (p);
 }

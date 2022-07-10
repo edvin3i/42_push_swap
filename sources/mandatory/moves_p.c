@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:17:14 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/30 15:19:27 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 06:38:30 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,20 @@ int	move_p(t_node **dst_st, t_node **src_st)
 	return (0);
 }
 
-int	pa(t_node **stack_a, t_node **stack_b)
+int	pa(t_node **stack_a, t_node **stack_b, int p)
 {
 	if (move_p(stack_a, stack_b) == -1)
 		return (-1);
-	ft_printf("pa\n");
+	if (p)
+		ft_printf("pa\n");
 	return (0);
 }
 
-int	pb(t_node **stack_a, t_node **stack_b)
+int	pb(t_node **stack_a, t_node **stack_b, int p)
 {
 	if (move_p(stack_b, stack_a) == -1)
 		return (-1);
-	ft_printf("pb\n");
+	if (p)
+		ft_printf("pb\n");
 	return (0);
 }

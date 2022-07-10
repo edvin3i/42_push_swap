@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:37:35 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/30 16:31:48 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 06:36:41 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 static void	three_moves(t_node **stack)
 {
-	ra(stack);
-	sa(stack);
-	rra(stack);
+	ra(stack, 1);
+	sa(stack, 1);
+	rra(stack, 1);
 }
 
 static void	one_move(t_node **stack, t_node *node, int min)
 {
 	if (node->next->index == min)
-		sa(stack);
+		sa(stack, 1);
 	else
-		rra(stack);
+		rra(stack, 1);
 }
 
 void	sort_three(t_node **stack)
@@ -46,11 +46,11 @@ void	sort_three(t_node **stack)
 	else
 	{
 		if (node->next->index == min)
-			ra(stack);
+			ra(stack, 1);
 		else
 		{
-			sa(stack);
-			rra(stack);
+			sa(stack, 1);
+			rra(stack, 1);
 		}
 	}
 }

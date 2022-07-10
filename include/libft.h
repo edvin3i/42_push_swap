@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:32:45 by gbreana           #+#    #+#             */
-/*   Updated: 2021/11/10 20:30:34 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 00:17:19 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		ft_strchri(const char *str, int c);
 /*
  * Get Next Line
  */
-char	*ft_get_new_chars(int fd, char *saved_lines, char *buffer);
+char	*ft_get_new_chars(int fd, char *saved_lines);
 char	*ft_get_line(char *saved_line);
 char	*ft_save(char *saved_line);
 char	*get_next_line(int fd);

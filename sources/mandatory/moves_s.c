@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:17:39 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/30 15:19:27 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 06:46:33 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,32 @@ int	move_s(t_node **stack)
 	return (0);
 }
 
-int	sa(t_node **stack)
+int	sa(t_node **stack, int p)
 {
 	if (move_s(stack) < 0)
 		return (-1);
-	ft_printf("sa\n");
+	if (p)
+		ft_printf("sa\n");
 	return (0);
 }
 
-int	sb(t_node **stack)
+int	sb(t_node **stack, int p)
 {
 	if (move_s(stack) < 0)
 		return (-1);
-	ft_printf("sb\n");
+	if (p)
+		ft_printf("sb\n");
 	return (0);
 }
 
-int	ss(t_node **stack_a, t_node **stack_b)
+int	ss(t_node **stack_a, t_node **stack_b, int p)
 {
 	if ((ps_lstsize(*stack_a) < 2) \
 	|| (ps_lstsize(*stack_b) < 2))
 		return (-1);
 	move_s(stack_a);
 	move_s(stack_b);
-	ft_printf("ss\n");
+	if (p)
+		ft_printf("ss\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 08:09:12 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/24 13:59:39 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 07:07:32 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		exit(0);
-	validation(argc, argv);
+	validation(argc, argv, 0);
 	stack_a = ps_lstcreate();
 	stack_b = ps_lstcreate();
 	ps_init_stack(stack_a, argc, argv);

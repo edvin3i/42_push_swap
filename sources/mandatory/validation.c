@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:48:43 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/31 01:06:51 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 08:24:23 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,26 @@
 
 int	is_allnums(int argc, char **argv)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	long	n;
 
 	i = 1;
+	(void)argc;
 	while (argv[i])
 	{
 		j = 0;
-		if (argv[i][j] == '-')
-			j++;
 		while (argv[i][j])
 		{
+			if (argv[i][j] == '-')
+				j++;
 			if (!ft_isdigit(argv[i][j]))
-			{
-				if (argc == 2)
-					ps_free_str(argv);
 				error();
-			}
 			j++;
 		}
+		n = ft_atoi(argv[i]);
+		if (n > INT_MAX || n < INT_MIN)
+			error();
 		i++;
 	}
 	return (0);
@@ -80,12 +81,13 @@ int	is_sorted_arr(int argc, char **argv)
 	}
 	if (argc == 2)
 		ps_free_str(argv);
-	exit(0);
+	return (1);
 }
 
-void	validation(int argc, char **argv)
+void	validation(int argc, char **argv, int bon)
 {
 	char	**tmp;
+	int		sorted;
 
 	if (argc == 2)
 		tmp = ft_split(argv[1], ' ');
@@ -93,7 +95,9 @@ void	validation(int argc, char **argv)
 		tmp = argv;
 	is_allnums(argc, tmp);
 	is_nodup(argc, tmp);
-	is_sorted_arr(argc, tmp);
+	sorted = is_sorted_arr(argc, tmp);
+	if (sorted && !bon)
+		exit(0);
 	if (argc == 2)
 		ps_free_str(tmp);
 }

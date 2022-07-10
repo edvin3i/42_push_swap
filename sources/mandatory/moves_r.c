@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:17:24 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/09 15:28:28 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 06:47:47 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,33 @@ int	move_r(t_node **stack)
 	return (0);
 }
 
-int	ra(t_node **stack)
+int	ra(t_node **stack, int p)
 {
 	if (move_r(stack) < 0)
 		return (-1);
-	ft_printf("ra\n");
+	if (p)
+		ft_printf("ra\n");
 	return (0);
 }
 
-int	rb(t_node **stack)
+int	rb(t_node **stack, int p)
 {
 	if (move_r(stack) < 0)
 		return (-1);
-	ft_printf("rb\n");
+	if (p)
+		ft_printf("rb\n");
 	return (0);
 }
 
-int	rr(t_node **stack_a, t_node **stack_b)
+int	rr(t_node **stack_a, t_node **stack_b, int p)
 {
 	if ((ps_lstsize(*stack_a) < 2) \
 	|| (ps_lstsize(*stack_b) < 2))
 		return (-1);
 	move_r(stack_a);
 	move_r(stack_b);
+	if (p)
+		ft_printf("rr\n");
 	return (0);
 }
 
@@ -66,11 +70,11 @@ void	ps_movetotop(t_node **stack, int count)
 	if (count <= len / 2)
 	{
 		while (!count--)
-			ra(stack);
+			ra(stack, 1);
 	}
 	else
 	{
 		while (!len--)
-			rra(stack);
+			rra(stack, 1);
 	}
 }

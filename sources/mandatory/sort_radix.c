@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 20:16:38 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/30 20:17:07 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 06:36:08 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	sort_radix(t_node **stack_a, t_node **stack_b)
 		{
 			node = *stack_a;
 			if (((node->index >> i) & 1) == 1)
-				ra(stack_a);
+				ra(stack_a, 1);
 			else
-				pb(stack_a, stack_b);
+				pb(stack_a, stack_b, 1);
 		}
 		while (ps_lstsize(*stack_b) != 0)
-			pa(stack_a, stack_b);
+			pa(stack_a, stack_b, 1);
 		i++;
 	}
 }

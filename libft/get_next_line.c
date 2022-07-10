@@ -6,17 +6,18 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:18:38 by gbreana           #+#    #+#             */
-/*   Updated: 2022/01/06 22:59:10 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 00:12:16 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../include/libft.h"
 
-char	*ft_get_new_chars(int fd, char *saved_lines, char *buffer)
+char	*ft_get_new_chars(int fd, char *saved_lines)
 {
-	int	chars_counter;
+	int		chars_counter;
+	char	buffer[BUFFER_SIZE + 1];
+	char	*line;
 
-	if (!buffer)
-		return (NULL);
 	chars_counter = 1;
 	while (!ft_strchr(saved_lines, '\n') && chars_counter != 0)
 	{
@@ -24,7 +25,9 @@ char	*ft_get_new_chars(int fd, char *saved_lines, char *buffer)
 		if (chars_counter == -1)
 			return (NULL);
 		buffer[chars_counter] = '\0';
+		line = saved_lines;
 		saved_lines = ft_strjoin(saved_lines, buffer);
+		free(line);
 	}
 	return (saved_lines);
 }
@@ -39,7 +42,7 @@ char	*ft_get_line(char *saved_line)
 		return (NULL);
 	while (saved_line[i] && saved_line[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char ) * (i + 2));
+	line = (char *)malloc(i + 2);
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -87,7 +90,7 @@ char	*ft_save(char *saved_line)
 
 char	*get_next_line(int fd)
 {
-	char		buff[BUFFER_SIZE + 1];
+	char		buff[1];
 	char		*line;
 	static char	*saved_lines;
 
@@ -95,18 +98,19 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!saved_lines)
 	{
-		saved_lines = (char *)malloc(sizeof (char) * 1);
+		saved_lines = (char *)malloc(1);
 		if (!saved_lines)
 			return (NULL);
 		saved_lines[0] = '\0';
 	}
-	saved_lines = ft_get_new_chars(fd, saved_lines, buff);
+	saved_lines = ft_get_new_chars(fd, saved_lines);
 	if (!saved_lines)
 		return (NULL);
 	line = ft_get_line(saved_lines);
 	saved_lines = ft_save(saved_lines);
 	if (line[0])
 		return (line);
+	close(fd);
 	free(line);
 	return (NULL);
 }

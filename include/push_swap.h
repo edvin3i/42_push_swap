@@ -6,7 +6,7 @@
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 11:43:00 by gbreana           #+#    #+#             */
-/*   Updated: 2022/03/24 11:43:12 by gbreana          ###   ########.fr       */
+/*   Updated: 2022/07/10 08:26:31 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,22 @@
 typedef struct s_node
 {
 	int				num;
+	int				flag;
 	int				index;
 	struct s_node	*next;
+	struct s_node	*prev;
 }				t_node;
 
+typedef struct s_param
+{
+	t_node	*stack_a;
+	t_node	*stack_b;
+	int		len_a;
+	int		len_b;
+	int		min;
+	int		mid;
+	int		max;
+}				t_param;
 /*
  * Push_Swap
  */
@@ -38,7 +50,7 @@ int		is_allnums(int argc, char **argv);
 int		is_nodup(int argc, char **argv);
 int		is_sorted_arr(int argc, char **argv);
 int		is_sorted_stack(t_node **stack);
-void	validation(int argc, char **argv);
+void	validation(int argc, char **argv, int bon);
 /*
  * Sort & Algorithms
  */
@@ -53,6 +65,7 @@ void	small_sel(t_node **stack_a, t_node **stack_b);
  */
 void	ps_set_index(t_node **stack);
 void	ps_init_stack(t_node **stack, int argc, char **argv);
+t_param	*ps_init_params(t_node **stack_a, t_node **stack_b);
 /*
  * Utils
  */
@@ -74,23 +87,28 @@ int		ps_movescount(t_node **stack, int index);
  * Moves
  */
 int		move_p(t_node **stack_a, t_node **stack_b);
-int		pa(t_node **stack_a, t_node **stack_b);
-int		pb(t_node **stack_a, t_node **stack_b);
+int		pa(t_node **stack_a, t_node **stack_b, int p);
+int		pb(t_node **stack_a, t_node **stack_b, int p);
 
 int		move_s(t_node **stack);
-int		sa(t_node **stack);
-int		sb(t_node **stack);
-int		ss(t_node **stack_a, t_node **stack_b);
+int		sa(t_node **stack, int p);
+int		sb(t_node **stack, int p);
+int		ss(t_node **stack_a, t_node **stack_b, int p);
 
 int		move_r(t_node **stack);
-int		ra(t_node **stack);
-int		rb(t_node **stack);
-int		rr(t_node **stack_a, t_node **stack_b);
+int		ra(t_node **stack, int p);
+int		rb(t_node **stack, int p);
+int		rr(t_node **stack_a, t_node **stack_b, int p);
 
 int		move_rev(t_node **stack);
-int		rra(t_node **stack);
-int		rrb(t_node **stack);
-int		rrr(t_node **stack_a, t_node **stack_b);
+int		rra(t_node **stack, int p);
+int		rrb(t_node **stack, int p);
+int		rrr(t_node **stack_a, t_node **stack_b, int p);
 void	ps_movetotop(t_node **stack, int count);
+/*
+	Bonus
+*/
+void	read_command(t_node **stack_a, t_node **stack_b, char *cmd);
+void	ps_check(t_node **stack_a, t_node **stack_b);
 
 #endif

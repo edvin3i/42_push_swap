@@ -1,50 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   sort_big.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbreana <gbreana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/27 22:20:05 by gbreana           #+#    #+#             */
-/*   Updated: 2022/07/10 08:16:55 by gbreana          ###   ########.fr       */
+/*   Created: 2022/07/10 02:40:09 by gbreana           #+#    #+#             */
+/*   Updated: 2022/07/10 06:32:25 by gbreana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 #include "../../include/push_swap.h"
 
-void	error(void)
+void	mv_down(t_params *params)
 {
-	write(2, "Error\n", 6);
-	exit(0);
+	params->stack_a->flag = -1;
+	ra(params->stack_a);
 }
 
-void	ps_free_str(char **str)
+int	min_b_a(t_params *p)
 {
-	int	i;
+	int	min;
 
-	i = 0;
-	while (str[i])
+	min = p->stack_a->prev->index + 1;
+	if (p->stack_b->index == min)
 	{
-		free(str[i]);
-		i++;
+		pa(p->stack_a, p->stack_b);
+		mv_down(p);
+		return (1);
 	}
-	if (str)
-		free(str);
-}
-
-void	ps_free_stack(t_node **stack)
-{
-	t_node	*tmp;
-	t_node	*node;
-
-	node = *stack;
-	while (node)
+	else if (p->stack_a->index == min)
+		mv_down(p);
+	else if (p->stack_a->next->index == min)
 	{
-		tmp = node;
-		node = node->next;
-		free(tmp);
+		sa(p->stack_a);
+		mv_down(p);
 	}
-	if (stack)
-		free(stack);
 }
